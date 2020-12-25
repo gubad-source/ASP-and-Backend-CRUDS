@@ -1,0 +1,37 @@
+﻿@model List<Nerd>
+@{
+    ViewData["Title"] = "Index";
+}
+<div>
+    <a type="submit" class="btn btn-outline-success my-3" asp-controller="nard" asp-action="create"><h3>Yarat</h3></a>
+</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Basliq</th>
+                <th scope="col">Metn</th>
+                <th scope="col">Tarix</th>
+                <th scope="col">Kateqoriya</th>
+                <th scope="col">Sekil</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model){
+            <tr>
+                <th scope="row">@item.Title</th>
+                <td>@Html.Raw(item.Text)</td>
+                <td>@item.PublishDate.ToString("HH:mm dd.MM.yyyy")</td>
+                <td>@item.Category.Name</td>
+                <td>
+                   <img width="100" src="~/uploads/@item.Photo" />
+                </td>
+                <td>
+                    <a asp-controller="nard" asp-action="delete" asp-route-id="@item.Id" onclick="return confirm('are you sure about that')"><i class="fas fa-trash-alt text-danger"></i></a>
+                    <a asp-controller="nard" asp-action="edit" asp-route-id="@item.Id"><i class="fas fa-edit text-primary"></i></a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
